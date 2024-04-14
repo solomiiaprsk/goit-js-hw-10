@@ -23,3 +23,52 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
+
+.nav {
+  padding: 25px;
+}
+
+ul,
+li {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+}
+
+.timer {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  margin-left: 25px;
+}
+
+.field {
+  text-align: center;
+  margin: 0 10px;
+}
+
+
+
+/* Input and Button styles */
+#datetime-picker {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-left: 25px;
+}
+
+button[data-start] {
+  padding: 10px 20px;
+  background-color: #ccc;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button[data-start]:hover {
+  background-color: #0056b3;
+  color: #fff;
+}
