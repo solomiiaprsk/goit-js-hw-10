@@ -47,15 +47,24 @@ li {
 .field {
   text-align: center;
   margin: 0 10px;
+  display: flex;
+  flex-direction: column;
+  text-transform: uppercase;
+  font-weight: 600;
 }
 
+.click-back {
+padding:25px;
+}
 
+.value {
+  font-size: 24px;
+}
 
-/* Input and Button styles */
 #datetime-picker {
   padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 2px;
   margin-left: 25px;
 }
 
@@ -63,7 +72,7 @@ button[data-start] {
   padding: 10px 20px;
   background-color: #ccc;
   border: none;
-  border-radius: 5px;
+  border-radius: 2px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
