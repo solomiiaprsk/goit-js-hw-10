@@ -6,7 +6,7 @@ import "izitoast/dist/css/iziToast.min.css";
 
 
 const calendar = document.querySelector("input#datetime-picker");
-const btn = document.querySelector(".start-btn");
+const btn = document.querySelector(".start-button");
 
 const options = {
   enableTime: true,
@@ -14,20 +14,18 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-      console.log(selectedDates[0]);
-      if (userSelectedDate < 0) {
-          alert("Please choose a date in the future");
-    
-      }
+    console.log(selectedDates[0]);
   },
 };
+
 
 let userSelectedDate = flatpickr(calendar, options);
 
 function dateChoose(selectedDates) {
       if (selectedDates[0] <= new Date()) {
           btn.disabled = true;
-          showErrorMessage("Error")
+          showErrorMessage("Error");
+          alert("Please choose a date in the future");
       } else {
           btn.disabled = false; 
   };
@@ -36,8 +34,6 @@ function dateChoose(selectedDates) {
 let intervalId;
 
 console.log(userSelectedDate.selectedDates[0].getTime());
-
-
 
 function timer() {
   clearInterval(intervalId);
@@ -63,8 +59,6 @@ function showSuccessMessage(message) {
     message: message,
   });
 };
-
-
 
 function showErrorMessage(message) {
   iziToast.error({
