@@ -4,9 +4,11 @@ import "flatpickr/dist/flatpickr.min.css";
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
+const calendar = document.querySelector("#datetimepkr");
+const btn = document.querySelector("[data-start]");
 
-const calendar = document.querySelector("input#datetime-picker");
-const btn = document.querySelector(".start-button");
+let userSelectedDate;
+let intervalId;
 
 const options = {
   enableTime: true,
@@ -14,58 +16,55 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    console.log(selectedDates[0]);
+    userSelectedDate = selectedDates[0]; 
+    let ms = userSelectedDate - new Date(); 
+    if (ms < 1) {
+      iziToast.error({
+        color: 'red',
+        position: 'topRight',
+        message: `Please choose a date in the future`,
+      });
+    } else {
+      btn.disabled = false;
+      calendar.disabled = true;
+    }
   },
 };
 
-
-let userSelectedDate = flatpickr(calendar, options);
-
-function dateChoose(selectedDates) {
-      if (selectedDates[0] <= new Date()) {
-          btn.disabled = true;
-          showErrorMessage("Error");
-          alert("Please choose a date in the future");
-      } else {
-          btn.disabled = false; 
-  };
-};
-
-let intervalId;
+userSelectedDate = flatpickr(calendar, options);
 
 console.log(userSelectedDate.selectedDates[0].getTime());
 
 function timer() {
   clearInterval(intervalId);
   let currentDate = new Date();
-  let ms = userSelectedDate.selectedDates[0] - currentDate;
+  let targetDate = userSelectedDate.selectedDates[0];
+  let ms = targetDate - currentDate; 
   updateTimerDisplay(ms);
-
+  
   intervalId = setInterval(() => {
+    ms -= 1000;
     updateTimerDisplay(ms);
-
     if (ms <= 0) {
       clearInterval(intervalId);
       showSuccessMessage('Success!');
     }
-
-    ms -= 1000;
   }, 1000);
-};
+}
 
 function showSuccessMessage(message) {
   iziToast.success({
     title: 'Success',
     message: message,
   });
-};
+}
 
 function showErrorMessage(message) {
   iziToast.error({
     title: 'Error',
     message: message,
   });
-};
+}
 
 function updateElement(selector, value) {
   document.querySelector(selector).textContent = value >= 0 ? addLeadingZero(value) : '00';
@@ -78,7 +77,6 @@ function updateTimerDisplay(ms) {
   updateElement("[data-minutes]", minutes);
   updateElement("[data-seconds]", seconds);
 }
-
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
@@ -103,6 +101,5 @@ console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
 console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
 console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
 
-
 btn.addEventListener("click", timer);
-document.addEventListener('DOMContentLoaded', () => {btn.disabled = true});
+document.addEventListener('DOMContentLoaded', () => { btn.disabled = true; });
