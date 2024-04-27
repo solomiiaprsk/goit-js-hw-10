@@ -25,7 +25,11 @@
 }
 
 .nav {
-  padding: 25px;
+  padding: 24px;
+}
+
+input {
+  margin-left: 24px;
 }
 
 ul,
@@ -41,7 +45,7 @@ li {
   display: flex;
   align-items: center;
   margin-top: 20px;
-  margin-left: 25px;
+  margin-left: 24px;
 }
 
 .field {
@@ -54,7 +58,7 @@ li {
 }
 
 .click-back {
-padding:25px;
+padding:24px;
 }
 
 .value {
@@ -65,19 +69,14 @@ padding:25px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 2px;
-  margin-left: 25px;
+  margin-left: 24px;
 }
 
-button[data-start] {
-  padding: 10px 20px;
-  background-color: #ccc;
-  border: none;
-  border-radius: 2px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+.form {
+  max-width: 300px;
+  padding:24px;
 }
 
-button[data-start]:hover {
-  background-color: #0056b3;
-  color: #fff;
+.promise-btn {
+  margin-top:24px;
 }
